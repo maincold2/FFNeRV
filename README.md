@@ -1,14 +1,18 @@
 # FFNeRV: Flow-Guided Frame-Wise Neural Representations for Videos
-Joo Chan Lee, Daniel Rho, Jong Hwan Ko†, and Eunbyung Park†
+#### Joo Chan Lee, Daniel Rho, Jong Hwan Ko†, and Eunbyung Park†
 
 ### [[Project Page](https://maincold2.github.io/ffnerv/)] [[Paper(arxiv)](https://)]
 
 Our code is based on [NeRV](https://github.com/haochen-rye/NeRV)
 
+## Method overview
+<img src="https://maincold2.github.io/ffnerv/img/fig_arch.png"  />
+
 ## 0. Requirements
 ```
 pip install -r requirements.txt 
 ```
+Dataset link: [UVG](https://ultravideo.fi/#testsequences)
 
 ## 1. Training (Encoding)
 ```bash
