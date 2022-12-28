@@ -194,9 +194,9 @@ class Generator(nn.Module):
         self.strides = kargs['stride_list']
         self.fc_h, self.fc_w, self.fc_dim = [int(x) for x in kargs['fc_hw_dim'].split('_')]
         # multi-resolution temporal grids
-        self.video_field = nn.ParameterList()
+        self.video_grid = nn.ParameterList()
         for t in kargs['t_dim']:
-            self.video_field.append(nn.Parameter(nn.init.xavier_uniform_(torch.empty(t,self.fc_dim//len(kargs['t_dim']),self.fc_h,self.fc_w))))
+            self.video_grid.append(nn.Parameter(nn.init.xavier_uniform_(torch.empty(t,self.fc_dim//len(kargs['t_dim']),self.fc_h,self.fc_w))))
                      
         # BUILD CONV LAYERS
         self.layers, self.head_layers = [nn.ModuleList() for _ in range(2)]
@@ -234,15 +234,15 @@ class Generator(nn.Module):
     
     def forward(self, input):
         out_list = []
-        for param in self.video_field: # multi-resolution grids
-            vf = self.quantize_fn(param)
+        for param in self.video_grid: # multi-resolution grids
+            vg = self.quantize_fn(param)
             # interpolate grid features
             inp = input*(param.size(0))
             left = torch.floor(inp+1e-6).long()
             right = torch.min(left+1, torch.tensor(param.size(0)-1))
             d_left = (inp - left).view(-1, 1, 1, 1)
             d_right = (right - inp).view(-1, 1, 1, 1)
-            out_list.append(d_right*vf[left] + d_left*vf[right] - ((right-left-1).view(-1,1,1,1))*vf[left])
+            out_list.append(d_right*vg[left] + d_left*vg[right] - ((right-left-1).view(-1,1,1,1))*vg[left])
         output = out_list[0]
         # concat latent features from multi-resolution grids
         for i in range(len(out_list)-1):
