@@ -91,7 +91,7 @@ def main():
     parser.add_argument('--suffix', default='', help="suffix str for outf")
     
     parser.add_argument('--agg_ind', nargs='+', default=[-2,-1,0,1,2], type=int, help='relative indices of neighboring frames to reference')
-    parser.add_argument('--wbit', nargs='+', default=32, type=int, help='QAT weight bit width')
+    parser.add_argument('--wbit', default=32, type=int, help='QAT weight bit width')
 
     args = parser.parse_args()
     
