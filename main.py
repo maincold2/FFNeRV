@@ -545,7 +545,6 @@ def evaluate(model, train_dataloader, val_dataloader, local_rank, args):
             quant_v = qfn.apply(weight, args.wbit)
             valid_quant_v = quant_v
             quant_weight_list.append(valid_quant_v.flatten())
-            cur_ckt[k] = quant_v
         cat_param = torch.cat(quant_weight_list)
         input_code_list = cat_param.tolist()
         unique, counts = np.unique(input_code_list, return_counts=True)
