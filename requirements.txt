@@ -2,7 +2,7 @@ torch==1.13.0
 numpy==1.19.2
 pytorch_msssim==0.2.1
 tqdm==4.59.0
-torchvision==0.9
+torchvision==0.14.0
 dahuffman==0.4.1
 Pillow==8.4.0
 yaspin==2.1.0
