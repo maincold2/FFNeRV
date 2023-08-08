@@ -13,6 +13,7 @@ Our code is based on [NeRV](https://github.com/haochen-rye/NeRV)
 pip install -r requirements.txt 
 ```
 (Update) Highly recommend upgrading the Pytorch version (>= 1.13.0) for faster training and inference.
+
 Dataset link: [UVG](https://ultravideo.fi/#testsequences)
 
 ## 1. Training (Encoding)
